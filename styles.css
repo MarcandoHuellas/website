@@ -1,0 +1,310 @@
+/* styles.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: overflow 0.3s ease;
+}
+
+body.no-scroll {
+    overflow: hidden; /* Evita el scroll de la página */
+}
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #ffffffe6;
+    display: flex;
+    justify-content: space-between; /* Mantiene elementos separados */
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #bb966a;
+}
+
+.logoimg {
+    margin-left: 10px; /* Espaciado entre el texto y la imagen */
+    height: 40px; /* Ajusta el tamaño de la imagen del logo */
+    filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.527));
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1100; /* Asegura que esté encima del menú */
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: 0;
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: #333;
+    padding: 10px 20px;
+    transition: color 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-links ul li a:hover {
+    color: #007aff;
+    background-color: rgba(0, 122, 255, 0.1);
+}
+
+.hero {
+    margin-top: 60px;
+    height: 100vh;
+    background: linear-gradient(to right, #f0f0f0, #e0e0e0);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        align-items: start;
+    }
+
+    .logoimg {
+        position: relative;
+        left: 32vh;
+        height: 40px; /* Ajusta el tamaño de la imagen del logo */
+        filter: drop-shadow(3px 3px 3px rgba(0, 0, 0, 0.527));
+    }
+
+    .nav-links {
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: rgba(255, 255, 255, 0.95);
+        overflow: hidden;
+        transition: height 0.5s ease-in-out;
+        z-index: 1000;
+        align-items: start;
+    }
+
+    .nav-links.active {
+        height: 100%;
+    }
+
+    .nav-links ul {
+        flex-direction: column;
+        margin-top: 70px;
+        gap: 15px;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out 0.2s;
+    }
+
+    .nav-links.active ul {
+        opacity: 1;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .dynamic-text {
+        margin: 52px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        top: 0.4vh;
+    }
+}
+
+.dynamic-text {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.dynamic-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-color: black;
+    background-position: center;
+    animation: slideshow 32s infinite; /* Duración del ciclo completo */
+    z-index: -1; /* Coloca las imágenes detrás del texto */
+    border-radius: 1.25rem; /* Combina con el diseño existente */
+}
+
+.dynamic-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Capa negra semitransparente */
+    z-index: -1; /* Coloca la capa negra sobre las imágenes pero detrás del texto */
+}
+
+@keyframes slideshow {
+    0% { background-image: url('./img/Imagen\ de\ WhatsApp\ 2024-12-07\ a\ las\ 23.00.02_1cc4a28a.jpg'); }
+    25% { background-image: url('./img/Imagen\ de\ WhatsApp\ 2024-12-07\ a\ las\ 23.00.03_3f511f17.jpg'); }
+    50% { background-image: url('./img/Imagen\ de\ WhatsApp\ 2024-12-07\ a\ las\ 23.00.03_6090ad1a.jpg'); }
+    75% { background-image: url('img/IMG-20241207-WA0031.jpg'); }
+    100% { background-image: url('img/IMG-20241207-WA0032.jpg'); }
+}
+
+/* Otros estilos existentes */
+.dynamic-text .card {
+    position: relative; /* Asegura que el texto permanezca dentro del contenedor */
+    background-color: #ffffffe6; /* Fondo semitransparente para destacar texto */
+    z-index: 0; /* Coloca el texto sobre las imágenes */
+    padding: 1rem;
+    margin-top: 1.1vh;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    --bg-color: #f8f8f8; /* Color de fondo suave */
+    padding: 1rem 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loader {
+    color: #bb966a;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.words {
+    overflow: hidden;
+    position: relative;
+    height: 40px;
+    margin-left: 6px;
+    margin-bottom: 0vh;
+    font-weight: 500;
+}
+
+
+.word {
+    display: block;
+    height: 100%;
+    padding-left: 3px;
+    color: #7c7c7c;
+    animation: spin_4991 4s infinite;
+}
+
+@keyframes spin_4991 {
+    10% {
+        transform: translateY(-102%);
+    }
+    25% {
+        transform: translateY(-100%);
+    }
+    35% {
+        transform: translateY(-202%);
+    }
+    50% {
+        transform: translateY(-200%);
+    }
+    60% {
+        transform: translateY(-302%);
+    }
+    75% {
+        transform: translateY(-300%);
+    }
+    85% {
+        transform: translateY(-402%);
+    }
+    100% {
+        transform: translateY(-400%);
+    }
+}
+
